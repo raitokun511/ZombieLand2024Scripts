@@ -2,20 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace zombie
+public class GameManager
 {
-    public class GameManager : MonoBehaviour
-    {
-        // Start is called before the first frame update
-        void Start()
-        {
+    public static int[] listZombie = { 0, 0, 0};
+    public static int zooLevel;
+    public static int gameLevel;
 
-        }
+    public static Bounds zooBounds;
+    public static Bounds farmBounds;
 
-        // Update is called once per frame
-        void Update()
-        {
 
-        }
-    }
 }

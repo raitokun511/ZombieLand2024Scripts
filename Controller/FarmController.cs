@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FarmController : MonoBehaviour
 {
+    public AssetsManager assetsManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,26 @@ public class FarmController : MonoBehaviour
     void Update()
     {
         
+    }
+    IEnumerator InitFarm()
+    {
+        float screenHeight = Camera.main.orthographicSize * 2;
+        float screenWidth = screenHeight * Camera.main.aspect;
+        float widthZoo = screenWidth;
+        float zooPosition = 0;
+        foreach (var zomZoo in GameManager.listZombie)
+        {
+            GameObject habitatInstance = Instantiate(assetsManager.habitat[0], gameObject.transform);
+            habitatInstance.transform.position = new Vector3(zooPosition, habitatInstance.transform.position.y, habitatInstance.transform.position.z);
+
+            if (GameManager.zooBounds.Equals(default(Bounds)))
+            {
+                GameManager.zooBounds = TransformUtils.GetBounds(habitatInstance);
+            }
+            GameObject zombieInstance = Instantiate(assetsManager.normalZombies[zomZoo], gameObject.transform);
+            zombieInstance.transform.position = habitatInstance.transform.position + new Vector3(GameManager.zooBounds.size.x, 0, GameManager.zooBounds.size.z / 2f);
+            zooPosition += widthZoo;
+            yield return null;
+        }
     }
 }

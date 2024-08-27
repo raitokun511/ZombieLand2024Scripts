@@ -91,19 +91,22 @@ public class ScreenController : MonoBehaviour
             {
                 if (swipeDelta.x > 0)
                 {
-                    StartCoroutine(SmoothMove(Vector3.right));
+                    StartCoroutine(SmoothMove(Vector3.left));
                 }
                 else
                 {
-                    StartCoroutine(SmoothMove(Vector3.left));
+                    StartCoroutine(SmoothMove(Vector3.right));
                 }
             }
         }
     }
     private IEnumerator SmoothMove(Vector3 direction)
     {
+        float screenHeight = Camera.main.orthographicSize * 2;
+        float screenWidth = screenHeight * Camera.main.aspect;
+
         Vector3 startPosition = Camera.main.transform.position;
-        Vector3 targetPosition = startPosition + direction * Screen.width / Screen.dpi; // Di chuyen theo do dai man hinh
+        Vector3 targetPosition = startPosition + direction * screenWidth; // Di chuyen theo do dai man hinh
 
         float elapsedTime = 0f;
         while (elapsedTime < 1f)
