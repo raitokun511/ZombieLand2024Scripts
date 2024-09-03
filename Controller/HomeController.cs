@@ -10,7 +10,10 @@ public class HomeController : MonoBehaviour
     [SerializeField]
     AssetsManager assetsManager;
     [SerializeField]
-    Transform zooTransformObject;
+    Transform zooCamPosition;
+    [SerializeField]
+    Transform digCamPosition;
+
     // Start is called before the first frame update
 
     void Start()
@@ -21,7 +24,10 @@ public class HomeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            MoveToDigPlace();
+        }
     }
     public void Home()
     {
@@ -34,5 +40,20 @@ public class HomeController : MonoBehaviour
     {
         
     }
-    
+    void MoveToDigPlace()
+    {
+        Camera.main.transform.position = digCamPosition.position;
+    }
+    void MoveToMainHouse()
+    {
+        Camera.main.transform.position = GameManager.mainHousePosition;
+    }
+    void MoveToNextZoo()
+    {
+
+    }
+    void MoveToNextFarm()
+    {
+
+    }
 }
